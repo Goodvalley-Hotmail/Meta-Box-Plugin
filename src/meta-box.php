@@ -58,6 +58,13 @@ function render_meta_box( WP_Post $post, array $meta_box ) {
 	wp_nonce_field( 'mbbasics_save', 'mbbasics_nonce' );
 
 	// Get the metadata
+	/*
+	 * CARLES START
+	 * We define $subtitle here.
+	 * Our $subtitle variable works in view.php because it's in a function, and view.php is called inside this function.
+	 * CARLES END
+	 */
+	$subtitle = get_post_meta( $post->ID, 'subtitle', true );
 
 	// Do any processing that needs to be done
 
