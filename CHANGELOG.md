@@ -15,3 +15,8 @@ Original as cloned from KnowtheCode Repo.
 
 Fixed typos.
 
+## 0.0.4
+
+- /src/view.php
+    * Added input and label to start building the MetaBox HTML.
+
