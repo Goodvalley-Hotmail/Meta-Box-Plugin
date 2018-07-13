@@ -63,7 +63,7 @@ function render_meta_box( WP_Post $post, array $meta_box ) {
 
 	// Load the view file
 	include METABOXBASICS_DIR . 'src/view.php';
-}git push -u origin master
+}
 
 add_action( 'save_post', __NAMESPACE__ . '\save_meta_box', 10, 2 );
 /**

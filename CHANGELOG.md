@@ -11,3 +11,7 @@ Original as cloned from KnowtheCode Repo.
 * /src/meta-box.php
     * Added comments for clarification.
 
+## 0.0.3
+
+Fixed typos.
+
