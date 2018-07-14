@@ -72,3 +72,8 @@ and pass it to WordPress, so it can verify that nonce.
 
 More information in the Comments of the `render_meta_box()` and `save_meta_box()` functions.
 
+## 0.0.8
+
+- /src/meta-box.php
+    * Added basic `update_post_meta()` function.
+
