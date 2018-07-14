@@ -111,3 +111,7 @@ Putting it back to the DataBase, we sanitize.
 
     * Removed comments from the last Stage, since we move on with other things.
 
+## 0.1.1
+
+We started adding more custom fields by adding a check field.
+
