@@ -165,3 +165,23 @@ It has several advantages:
     
     * The first step is looping through our custom fields.
 
+## 0.1.5
+
+In our new `foreach()`, how can we make sure that there's always a Key for each custom field
+within our Array?
+
+We can merge `$_POST['mbbasics']` with defaults by using PHP's `array_merge()` or
+`wp_parse_args()` from WordPress' core. The difference is that with `wp_parse_args()`
+we can pass in a string, not only an Array.
+
+Once we've done the merging, our `foreach()` processes the data coming back from the new
+`$metadata` variable.
+
+If, for example, our checkbox `'show_subtitle'` custom field is unchecked
+so it doesn't exist in the incoming data, then it pulls in the defaults,
+and we get a new Array.
+
+We can check this out with the `d()` and `ddd()` functions that are left in the code.
+
+All of this gives us control about what we expect and what we get.
+

@@ -78,9 +78,29 @@ function save_meta_box( $post_id, $post ) {
 		return false;
 	}
 
-	// Merge the metadata.
+	/*
+	 * CARLES START
+	 * We have an Array coming with $_POST['mbbasics'], and then we want to have an Array with defaults.
+	 * One for each one of our custom fields.
+	 *
+	 * By doing this, for example, our 'show_subtitle' check custom field won't appear in $_POST['mbbasics']
+	 * if it's unchecked, but will show up in the defaults because we've merged all together.
+	 *
+	 * The foreach() below processes what we've just merged, so $_POST['mbbasics'] is replaced by $metadata.
+	 * CARLES END
+	 */
+	// Merge with defaults.
+	$metadata = wp_parse_args(
+		$_POST['mbbasics'], // Our Array.
+		array( // Array of defaults.
+			'subtitle'      => '', // Our default will be an empty string.
+			'show_subtitle' => 0, // Our default will be zero.
+		)
+	);
 
-	// Multiple custom fields.
+	// Let's test, with checked, unchecked, etc.
+	d( $_POST['mbbasics'] );
+	ddd( $metadata ); // We want to see what's in this MetaData after we've merged everything together.
 
 	// Loop through the custom fields and update the `wp_postmeta` database.
 	/*
@@ -97,7 +117,7 @@ function save_meta_box( $post_id, $post ) {
 	 *      update_post_meta()
 	 * CARLES END
 	 */
-	foreach ( $_POST['mbbasics'] as $meta_key => $value ) {
+	foreach ( $metadata as $meta_key => $value ) {
 
 		// Validation and sanitizing.
 
