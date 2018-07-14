@@ -98,10 +98,6 @@ function save_meta_box( $post_id, $post ) {
 		)
 	);
 
-	// Let's test, with checked, unchecked, etc.
-	d( $_POST['mbbasics'] );
-	ddd( $metadata ); // We want to see what's in this MetaData after we've merged everything together.
-
 	// Loop through the custom fields and update the `wp_postmeta` database.
 	/*
 	 * CARLES START
@@ -119,16 +115,25 @@ function save_meta_box( $post_id, $post ) {
 	 */
 	foreach ( $metadata as $meta_key => $value ) {
 
-		// Validation and sanitizing.
-
 		if ( ! $value ) {
 
-			// If there's no value, we delete it.
 			delete_post_meta( $post_id, $meta_key );
 
 		} else {
 
-			// Else we do an update.
+			// Validation and sanitizing.
+			/* Long form:
+			if ( 'subtitle' === $meta_key ) {
+				$value = sanitize_text_field( $value );
+			} else {
+				$value = 1;
+			}*/
+
+			// Short form, ternary:
+			$value = 'subtitle' === $meta_key
+				? sanitize_text_field( $value )
+				: 1;
+
 			update_post_meta( $post_id, $meta_key, $value );
 
 		}
@@ -136,24 +141,24 @@ function save_meta_box( $post_id, $post ) {
 	}
 
 
-	if ( $_POST['subtitle'] === '' ) {
-
-		delete_post_meta( $post_id, 'subtitle' );
-
-	} else {
-
-		update_post_meta( $post_id, 'subtitle', sanitize_text_field( $_POST['subtitle'] ) );
-
-	}
-
-	if ( ! array_key_exists( 'show_subtitle', $_POST ) ) {
-
-		delete_post_meta( $post_id, 'show_subtitle' );
-
-	} else {
-
-		update_post_meta( $post_id, 'show_subtitle', 1 );
-
-	}
+//	if ( $_POST['subtitle'] === '' ) {
+//
+//		delete_post_meta( $post_id, 'subtitle' );
+//
+//	} else {
+//
+//		update_post_meta( $post_id, 'subtitle', sanitize_text_field( $_POST['subtitle'] ) );
+//
+//	}
+//
+//	if ( ! array_key_exists( 'show_subtitle', $_POST ) ) {
+//
+//		delete_post_meta( $post_id, 'show_subtitle' );
+//
+//	} else {
+//
+//		update_post_meta( $post_id, 'show_subtitle', 1 );
+//
+//	}
 
 }

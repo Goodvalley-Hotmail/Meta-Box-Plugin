@@ -185,3 +185,11 @@ We can check this out with the `d()` and `ddd()` functions that are left in the 
 
 All of this gives us control about what we expect and what we get.
 
+## 0.1.6
+
+- /src/meta-box.php
+
+    * Sanitized the custom fields' values that are returned to the Browser.
+    
+    * Modified the `foreach()` function.
+
