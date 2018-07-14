@@ -130,14 +130,22 @@ function save_meta_box( $post_id, $post ) {
 	// Merge the metadata.
 
 	/*
-	 * CARLES START
-	 * This updates the information and stores it in the DataBase.
-	 * But if we leave the value empty, the DataBase still has the Key and empty Value stored.
-	 * We need it all to be deleted if empty.
-	 * Next version 008 has the code.
-	 * CARLES END
+	 * CARLES START 008
+	 * If there is data to be stored, then do an update. Else, delete all of it.
+	 * Also, if we put 0 as the Content of the field, it will be taken as a falsey, so PHP will consider it null,
+	 * empty, no value.
+	 * To avoid that if we need to store that 0, we tell it to update if $_POST is not an empty string.
+	 * CARLES END 008
 	 */
 	// Loop through the custom fields and update the `wp_postmeta` database.
-	update_post_meta( $post_id, 'subtitle', $_POST['subtitle'] );
+	if ( $_POST['subtitle'] !== '' ) {
+
+		update_post_meta( $post_id, 'subtitle', $_POST['subtitle'] );
+
+	} else {
+
+		delete_post_meta( $post_id, 'subtitle' );
+
+	}
 
 }
