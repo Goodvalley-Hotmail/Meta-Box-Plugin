@@ -85,6 +85,7 @@ add_action( 'save_post', __NAMESPACE__ . '\save_meta_box', 10, 2 );
  */
 function save_meta_box( $post_id, $post ) {
 
+	// Just for checking the Content that is returned in the $_POST super-global variable.
 	ddd( $_POST );
 
 	// If the nonce doesn't match, return false.
