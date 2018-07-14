@@ -75,6 +75,7 @@ More information in the Comments of the `render_meta_box()` and `save_meta_box()
 ## 0.0.8
 
 - /src/meta-box.php
+
     * Added basic `update_post_meta()` function.
 
 ## 0.0.9
@@ -99,4 +100,14 @@ More information in the Comments of the `render_meta_box()` and `save_meta_box()
 
 Sending it out to the Browser, we escape.
 Putting it back to the DataBase, we sanitize.
+
+## 0.1.0
+
+- /src/meta-box.php
+
+    * Removed comments from the last Stage, since we move on with other things.
+
+- /src/view.php
+
+    * Removed comments from the last Stage, since we move on with other things.
 
