@@ -47,3 +47,28 @@ Fixed typos.
  Now with `ddd( $_POST );` we can take a look of what's been posted back because PHP
  stores it all in the $_POST super-global variable.
 
+## 0.0.7
+
+- /src/meta-box.php
+    * Moved the `if( ! array_key_exists().... )` check above the nonce, a more logical place.
+
+When we render out the HTML for our MetaBox, the very first line is to create a nonce field.
+Then WordPress gives us two `<input>` fields that appear before our `<p>` HTML element.
+
+The `<input name="">` of the first field is, in this case, 'mbbasics_nonce'.
+
+The other `<input name="">` if for who is doing the referral, in case we want to use that.
+
+In the process of saving or updating, `name="mbbasics_nonce"` in the hidden `<input>` is the
+Key that will be stored in the `$_POST` super-global variable. So `$_POST['mbbasics_nonce']` is
+the Key that references the `value="yadayadayada"` value.
+
+So, when 'save' or 'update' is pressed, the information goes through the Internet to the Server,
+then PHP stores it in the `$_POST` super-global variable. The name is the Key for that nonce
+which is the Value.
+
+So the 'mbbasics_nonce' Key is used by `wp_nonce_field()` and `wp_verify_nonce()` to grab the Content
+and pass it to WordPress, so it can verify that nonce.
+
+More information in the Comments of the `render_meta_box()` and `save_meta_box()` functions.
+

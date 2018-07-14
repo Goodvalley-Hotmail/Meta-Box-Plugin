@@ -54,6 +54,14 @@ function register_meta_box() {
  * @return void
  */
 function render_meta_box( WP_Post $post, array $meta_box ) {
+
+	/*
+	 * CARLES START
+	 * 'mbbasics_save' is the action.
+	 * 'mbbasics_nonce' is the Key name.
+	 * As we can see, both are wired to the wp_verify_nonce() function if we look at it.
+	 * CARLES END
+	 */
 	// Security with a nonce
 	wp_nonce_field( 'mbbasics_save', 'mbbasics_nonce' );
 
@@ -85,14 +93,6 @@ add_action( 'save_post', __NAMESPACE__ . '\save_meta_box', 10, 2 );
  */
 function save_meta_box( $post_id, $post ) {
 
-	// Just for checking the Content that is returned in the $_POST super-global variable.
-	ddd( $_POST );
-
-	// If the nonce doesn't match, return false.
-	if ( ! wp_verify_nonce( $_POST['mbbasics_nonce'], 'mbbasics_save' ) ) {
-		return false;
-	}
-
 	// If there's no data, return false.
 	/*
 	 * CARLES START
@@ -103,9 +103,28 @@ function save_meta_box( $post_id, $post ) {
 	 * So now we're checking if the 'subtitle' Key exists in that Array.
 	 * CARLES END
 	 */
-	//if ( ! isset( $_POST['subtitle'] ) ) { // Commented because we change to array_key_exists().
-	if ( ! array_key_exists( 'subtitle', $_POST ) ) { // If the 'subtitle' Key doesn't exist, bail out.
+//	if ( ! isset( $_POST['subtitle'] ) ) { // Commented because we change to array_key_exists().
+//		return;
+//	}
+	// If the 'subtitle' Key doesn't exist, bail out. Same as, if this is not the right MetaBox, bail out.
+	// We've also moved the function above the nonce because if we don't have the right key, there's nothing for us to do.
+	if ( ! array_key_exists( 'subtitle', $_POST ) ) {
 		return;
+	}
+
+	/*
+	 * CARLES START
+	 * WordPress will grab the $_POST['mbbasics_nonce'] value here and compare it to the 'mbbasics_save' action to see
+	 * if all matches the information that was created in the above render_meta_box() function and stored in the
+	 * <input value="">. If the two 'mbbasics_nonce' match, all is fine.
+	 * Summary:
+	 * 1.- Verifies that this is the right MetaBox.
+	 * 2.- Security check: should we really save this info? Does it really come from the right source?
+	 * CARLES END
+	 */
+	// If the nonce doesn't match, return false.
+	if ( ! wp_verify_nonce( $_POST['mbbasics_nonce'], 'mbbasics_save' ) ) {
+		return false;
 	}
 
 	// Merge the metadata.
