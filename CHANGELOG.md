@@ -156,3 +156,12 @@ It has several advantages:
 
 5.- We can loop through all that Meta Data and avoid redundancy.
 
+## 0.1.4
+
+- /src/meta-box.php
+
+    * Since we have our new Key for all of our custom fields,
+    we start avoiding redundancies.
+    
+    * The first step is looping through our custom fields.
+

@@ -68,8 +68,6 @@ add_action( 'save_post', __NAMESPACE__ . '\save_meta_box', 10, 2 );
  */
 function save_meta_box( $post_id, $post ) {
 
-	ddd( $_POST['mbbasics'] );
-
 	// If there's no data, return false.
 	if ( ! array_key_exists( 'mbbasics', $_POST ) ) {
 		return;
@@ -85,6 +83,39 @@ function save_meta_box( $post_id, $post ) {
 	// Multiple custom fields.
 
 	// Loop through the custom fields and update the `wp_postmeta` database.
+	/*
+	 * CARLES START
+	 * Now that we have our 'mbbasics' Key, we can loop through all the custom fields,
+	 * the data that comes back in $_POST, and we do that off of our MetaBox 'mbbasics' key.
+	 *
+	 * Things that we will need:
+	 * 1.- Validation and sanitizing:
+	 *
+	 * 2.- If we should delete it:
+	 *      delete_post_meta()
+	 * 3.- Else we do an update:
+	 *      update_post_meta()
+	 * CARLES END
+	 */
+	foreach ( $_POST['mbbasics'] as $meta_key => $value ) {
+
+		// Validation and sanitizing.
+
+		if ( ! $value ) {
+
+			// If there's no value, we delete it.
+			delete_post_meta( $post_id, $meta_key );
+
+		} else {
+
+			// Else we do an update.
+			update_post_meta( $post_id, $meta_key, $value );
+
+		}
+
+	}
+
+
 	if ( $_POST['subtitle'] === '' ) {
 
 		delete_post_meta( $post_id, 'subtitle' );
