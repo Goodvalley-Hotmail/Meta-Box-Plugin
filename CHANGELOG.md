@@ -35,6 +35,8 @@ Fixed typos.
 - /src/meta-box.php
     * Changed the Key value and replaced `isset()` by `array_key_exists()`.
     All is explained in the Comments and below.
+    
+    * Added `ddd( $_POST );` just to check, as explained below.
 
 - If we inspect the Edit Post Page in WordPress, we will see it's just a big Form:
  `<form name="post" action="post.php" method="post" id="post"...>....</form>`
