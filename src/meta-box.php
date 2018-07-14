@@ -144,7 +144,8 @@ function save_meta_box( $post_id, $post ) {
 
 	} else {
 
-		update_post_meta( $post_id, 'subtitle', $_POST['subtitle'] );
+		// For sanitizing. we could use strip_tags(), but WordPress sanitize_text_field() is much better.
+		update_post_meta( $post_id, 'subtitle', sanitize_text_field( $_POST['subtitle'] ) );
 
 	}
 

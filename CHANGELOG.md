@@ -91,3 +91,12 @@ More information in the Comments of the `render_meta_box()` and `save_meta_box()
 
     * Modified the `update_post_meta()` function again to be more clear.
 
+## 0.0.11
+
+- /src/meta-box.php
+    
+    * Sanitize the `update_post_meta()` function properly.
+
+Sending it out to the Browser, we escape.
+Putting it back to the DataBase, we sanitize.
+
