@@ -115,3 +115,9 @@ Putting it back to the DataBase, we sanitize.
 
 We started adding more custom fields by adding a check field.
 
+## 0.1.2
+
+- /src/meta-box.php
+
+    * Modified the conditionals to update/delete the check custom field that we added.
+

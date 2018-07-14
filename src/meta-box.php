@@ -91,15 +91,16 @@ function save_meta_box( $post_id, $post ) {
 	 *
 	 * So we need to be able to say: if 'show_subtitle' Key doesn't exist, delete.
 	 * Else, if 'show_subtitle' is checked then we want to store a Value of 1.
-	 * We will fix this in the next version 0.1.2
+	 *
+	 * The solution comes by using array_key_exists(), doing the same check as we did in the d().
+	 * So, if 'show_subtitle' doesn't exist in our super-global $_POST variable, delete the whole thing.
+	 * Otherwise, store a Value of 1 in the DataBase.
 	 * CARLES END
 	 */
-//	d( $_POST['subtitle'] );
-//	ddd( $_POST['show_subtitle'] );
 
-	d( $_POST['subtitle'] );
-	d( array_key_exists( 'show_subtitle', $_POST ) ); // Check if 'show_subtitle' exists in our super-global.
-	ddd( $_POST['show_subtitle'] );
+//	d( $_POST['subtitle'] );
+//	d( array_key_exists( 'show_subtitle', $_POST ) ); // Check if 'show_subtitle' exists in our super-global.
+//	ddd( $_POST['show_subtitle'] );
 
 	// Loop through the custom fields and update the `wp_postmeta` database.
 	if ( $_POST['subtitle'] === '' ) {
@@ -112,7 +113,7 @@ function save_meta_box( $post_id, $post ) {
 
 	}
 
-	if ( $_POST['show_subtitle'] === '' ) {
+	if ( ! array_key_exists( 'show_subtitle', $_POST ) ) {
 
 		delete_post_meta( $post_id, 'show_subtitle' );
 
