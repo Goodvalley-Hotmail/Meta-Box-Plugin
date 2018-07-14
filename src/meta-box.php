@@ -130,21 +130,21 @@ function save_meta_box( $post_id, $post ) {
 	// Merge the metadata.
 
 	/*
-	 * CARLES START 008
-	 * If there is data to be stored, then do an update. Else, delete all of it.
-	 * Also, if we put 0 as the Content of the field, it will be taken as a falsey, so PHP will consider it null,
-	 * empty, no value.
-	 * To avoid that if we need to store that 0, we tell it to update if $_POST is not an empty string.
-	 * CARLES END 008
+	 * CARLES START 0.0.10
+	 * If there is no data to be stored, then delete all of it. Else, update the Post.
+	 * We tell it to check if $_POST is equal to an empty string because we don't want input values like 0 to be taken as
+	 * falsey and then PHP to consider the field as null, empty, no value.
+	 * Therefore, $_POST['subtitle'] must be equal to ''.
+	 * CARLES END 0.0.10
 	 */
 	// Loop through the custom fields and update the `wp_postmeta` database.
-	if ( $_POST['subtitle'] !== '' ) {
+	if ( $_POST['subtitle'] === '' ) {
 
-		update_post_meta( $post_id, 'subtitle', $_POST['subtitle'] );
+		delete_post_meta( $post_id, 'subtitle' );
 
 	} else {
 
-		delete_post_meta( $post_id, 'subtitle' );
+		update_post_meta( $post_id, 'subtitle', $_POST['subtitle'] );
 
 	}
 

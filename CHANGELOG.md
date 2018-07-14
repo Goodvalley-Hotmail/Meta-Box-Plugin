@@ -81,7 +81,13 @@ More information in the Comments of the `render_meta_box()` and `save_meta_box()
 
 - /src/meta-box.php
 
-    * Modified `update_post_meta()` function so it can store 0 as the field Content.
+    * Modified the `update_post_meta()` function so it can store 0 as the field Content.
       
     * Also, modified some of the comments on that section.
+
+## 0.0.10
+
+- /src/meta-box.php
+
+    * Modified the `update_post_meta()` function again to be more clear.
 
