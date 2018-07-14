@@ -84,6 +84,9 @@ add_action( 'save_post', __NAMESPACE__ . '\save_meta_box', 10, 2 );
  * @return void
  */
 function save_meta_box( $post_id, $post ) {
+
+	ddd( $_POST );
+
 	// If the nonce doesn't match, return false.
 	if ( ! wp_verify_nonce( $_POST['mbbasics_nonce'], 'mbbasics_save' ) ) {
 		return false;
