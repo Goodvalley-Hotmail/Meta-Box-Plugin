@@ -121,3 +121,38 @@ We started adding more custom fields by adding a check field.
 
     * Modified the conditionals to update/delete the check custom field that we added.
 
+## 0.1.3
+
+- /src/view.php
+
+    * Modified the names in all the `<input>` so they become Sub-Keys of the 'mbbasics' Key Array.
+
+Since we will be probably using many custom fields for different purposes,
+we may have to deal with a lot of redundancies in our code.
+
+We could use a specific Key to be our MetaBox Key, so we can use it for example in our
+`if( ! array_key_exists( 'subtitle', $_POST ) ) {....` code in the `save_meta_box()` function
+to check for all our custom fields.
+All would be then stored in that Key within the super-global $_POST variable.
+
+We then choose 'mbbasics' as our Key.
+
+If we look in /src/view.php, we'll see that the `names="this_is_a_key_name"` are the Keys that will be within $_POST.
+
+So `name="subtitle"` will be `$_POST['subtitle']`, and `name="show_subtitle"` will be `$_POST['show_subtitle']`.
+
+Since we will use one Key for all our custom fields, we need those names/keys to be sub-keys
+of the 'mbbasics' Array, so it becomes an Array of Arrays.
+
+It has several advantages:
+
+1.- We are wrapping everything in what is essentially a namespace.
+
+2.- We only have to deal with one Key in the super-global `$_POST` variable when we do our validation.
+
+3.- We are grouping all custom fields of a MetaBox in one element within the `$_POST` Array.
+
+4.- It is easier to merge defaults.
+
+5.- We can loop through all that Meta Data and avoid redundancy.
+

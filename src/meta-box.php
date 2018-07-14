@@ -68,8 +68,10 @@ add_action( 'save_post', __NAMESPACE__ . '\save_meta_box', 10, 2 );
  */
 function save_meta_box( $post_id, $post ) {
 
+	ddd( $_POST['mbbasics'] );
+
 	// If there's no data, return false.
-	if ( ! array_key_exists( 'subtitle', $_POST ) ) {
+	if ( ! array_key_exists( 'mbbasics', $_POST ) ) {
 		return;
 	}
 
@@ -81,26 +83,6 @@ function save_meta_box( $post_id, $post ) {
 	// Merge the metadata.
 
 	// Multiple custom fields.
-	/*
-	 * CARLES START
-	 * We'll use d() and ddd() for both custom fields to see how it goes.
-	 *
-	 * With this code, if the 'show_subtitle' field is unchecked, we get a NULL value.
-	 * This is because with a checkbox, if the value is unchecked then the Key doesn't exist either.
-	 * We can see this by adding a d( array_key_exists() );
-	 *
-	 * So we need to be able to say: if 'show_subtitle' Key doesn't exist, delete.
-	 * Else, if 'show_subtitle' is checked then we want to store a Value of 1.
-	 *
-	 * The solution comes by using array_key_exists(), doing the same check as we did in the d().
-	 * So, if 'show_subtitle' doesn't exist in our super-global $_POST variable, delete the whole thing.
-	 * Otherwise, store a Value of 1 in the DataBase.
-	 * CARLES END
-	 */
-
-//	d( $_POST['subtitle'] );
-//	d( array_key_exists( 'show_subtitle', $_POST ) ); // Check if 'show_subtitle' exists in our super-global.
-//	ddd( $_POST['show_subtitle'] );
 
 	// Loop through the custom fields and update the `wp_postmeta` database.
 	if ( $_POST['subtitle'] === '' ) {
