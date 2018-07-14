@@ -90,7 +90,17 @@ function save_meta_box( $post_id, $post ) {
 	}
 
 	// If there's no data, return false.
-	if ( ! isset( $_POST['mbbasics'] ) ) {
+	/*
+	 * CARLES START
+	 * This checks if the Key is there or not: isset()
+	 *
+	 * We will change it to array_key_exists().
+	 * $_POST is a super-global variable in PHP which is an Array.
+	 * So now we're checking if the 'subtitle' Key exists in that Array.
+	 * CARLES END
+	 */
+	//if ( ! isset( $_POST['subtitle'] ) ) { // Commented because we change to array_key_exists().
+	if ( ! array_key_exists( 'subtitle', $_POST ) ) { // If the 'subtitle' Key doesn't exist, bail out.
 		return;
 	}
 

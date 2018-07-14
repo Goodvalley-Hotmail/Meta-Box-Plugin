@@ -30,3 +30,18 @@ Fixed typos.
 - /src/meta-box.php
     * Define our $subtitle variable as the Post Meta that we pull from the DataBase.
 
+## 0.0.6
+
+- /src/meta-box.php
+    * Changed the Key value and replaced `isset()` by `array_key_exists()`.
+    All is explained in the Comments and below.
+
+- If we inspect the Edit Post Page in WordPress, we will see it's just a big Form:
+ `<form name="post" action="post.php" method="post" id="post"...>....</form>`
+ So we have a "post.php" action where it will be processed at, and a "post" method so that
+ all those Form Fields (`<input>....`) will be posted back. WordPress handles that action and
+ fires the `add_action( 'save_post'.... );` event, which calls our `save_meta_box()` function.
+ 
+ Now with `ddd( $_POST );` we can take a look of what's been posted back because PHP
+ stores it all in the $_POST super-global variable.
+
