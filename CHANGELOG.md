@@ -203,3 +203,13 @@ All of this gives us control about what we expect and what we get.
 
 This is how the Meta-Box plugin is at the end of the "WordPress MetaBox Basics" Lab.
 
+## 0.2.1
+
+- Changed the name of the Plugin to "Reusable MetaBox". Then changed the namespace, etc.
+
+- Add directories, meta-box and view files, move and remove some of the existing ones, etc.
+
+- Add a 'portfolio' MetaBox.
+
+- Replace the references to 'mbbasics' and 'subtitle' by the 'portfolio' ones.
+
