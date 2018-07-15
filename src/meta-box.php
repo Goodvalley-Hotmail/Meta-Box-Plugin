@@ -78,87 +78,35 @@ function save_meta_box( $post_id, $post ) {
 		return false;
 	}
 
-	/*
-	 * CARLES START
-	 * We have an Array coming with $_POST['mbbasics'], and then we want to have an Array with defaults.
-	 * One for each one of our custom fields.
-	 *
-	 * By doing this, for example, our 'show_subtitle' check custom field won't appear in $_POST['mbbasics']
-	 * if it's unchecked, but will show up in the defaults because we've merged all together.
-	 *
-	 * The foreach() below processes what we've just merged, so $_POST['mbbasics'] is replaced by $metadata.
-	 * CARLES END
-	 */
 	// Merge with defaults.
 	$metadata = wp_parse_args(
-		$_POST['mbbasics'], // Our Array.
-		array( // Array of defaults.
-			'subtitle'      => '', // Our default will be an empty string.
-			'show_subtitle' => 0, // Our default will be zero.
+		$_POST['mbbasics'],
+		array(
+			'subtitle'      => '',
+			'show_subtitle' => 0,
 		)
 	);
 
 	// Loop through the custom fields and update the `wp_postmeta` database.
-	/*
-	 * CARLES START
-	 * Now that we have our 'mbbasics' Key, we can loop through all the custom fields,
-	 * the data that comes back in $_POST, and we do that off of our MetaBox 'mbbasics' key.
-	 *
-	 * Things that we will need:
-	 * 1.- Validation and sanitizing:
-	 *
-	 * 2.- If we should delete it:
-	 *      delete_post_meta()
-	 * 3.- Else we do an update:
-	 *      update_post_meta()
-	 * CARLES END
-	 */
 	foreach ( $metadata as $meta_key => $value ) {
 
+		// If no value, delete the Post Meta record.
 		if ( ! $value ) {
 
 			delete_post_meta( $post_id, $meta_key );
 
-		} else {
-
-			// Validation and sanitizing.
-			/* Long form:
-			if ( 'subtitle' === $meta_key ) {
-				$value = sanitize_text_field( $value );
-			} else {
-				$value = 1;
-			}*/
-
-			// Short form, ternary:
-			$value = 'subtitle' === $meta_key
-				? sanitize_text_field( $value )
-				: 1;
-
-			update_post_meta( $post_id, $meta_key, $value );
+			// We add continue, so it skips the rest of the function and goes back up of the loop to start again.
+			continue;
 
 		}
 
+		// Validation and sanitizing.
+		$value = 'subtitle' === $meta_key
+			? sanitize_text_field( $value )
+			: 1;
+
+		update_post_meta( $post_id, $meta_key, $value );
+
 	}
-
-
-//	if ( $_POST['subtitle'] === '' ) {
-//
-//		delete_post_meta( $post_id, 'subtitle' );
-//
-//	} else {
-//
-//		update_post_meta( $post_id, 'subtitle', sanitize_text_field( $_POST['subtitle'] ) );
-//
-//	}
-//
-//	if ( ! array_key_exists( 'show_subtitle', $_POST ) ) {
-//
-//		delete_post_meta( $post_id, 'show_subtitle' );
-//
-//	} else {
-//
-//		update_post_meta( $post_id, 'show_subtitle', 1 );
-//
-//	}
 
 }

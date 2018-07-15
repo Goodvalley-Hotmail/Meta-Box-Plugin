@@ -193,3 +193,9 @@ All of this gives us control about what we expect and what we get.
     
     * Modified the `foreach()` function.
 
+## 0.1.7
+
+- /src/meta-box.php
+
+    * Modified the `foreach()` function to optimize it.
+
