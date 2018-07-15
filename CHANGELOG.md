@@ -199,3 +199,7 @@ All of this gives us control about what we expect and what we get.
 
     * Modified the `foreach()` function to optimize it.
 
+## 0.2.0
+
+This is how the Meta-Box plugin is at the end of the "WordPress MetaBox Basics" Lab.
+
