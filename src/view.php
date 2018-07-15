@@ -1,4 +1,3 @@
-<!-- We make the names become sub-Keys of the 'mbbasics' Key by wrapping them in square brackets. -->
 <p>
 	<label for="subtitle"><?php _e( 'Subtitle', 'mbbasics' ); ?></label>
 	<input class="large-text" type="text" name="mbbasics[subtitle]" value="<?php esc_attr_e( $subtitle ); ?>">
