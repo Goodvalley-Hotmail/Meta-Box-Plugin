@@ -236,3 +236,18 @@ This is how the Meta-Box plugin is at the end of the "WordPress MetaBox Basics" 
     if this is the right Metabox, and we also use it in our `/views/*.php` files.
     So we will use that Key in our `meta-box-config.php` file, as the `'unique-meta-box-id'` value.
     
+## 0.2.3
+
+- /reusable-meta-box/src/metadata/defaults/meta-box-config.php and
+  /reusable-meta-box/src/metadata/meta-box.php
+  
+  Let's imagine we somehow get a unique meta_box_key, `$meta_box_key`.
+  Then, we also have a configuration, and what we want from this configuration is
+  `'add_meta_box'`, and we get it with `getConfig( $meta_box_key, 'add_meta_box' );`.
+  
+  So, we somehow find out what is the `'unique-meta-box-id'` Key from `meta-box-config.php`.
+  Then, when we go to the `config-store.php`, we pass it this Key which, in the `config-store.php`,
+  means that it's going to point to the configuration array. What we want to plug out from there
+  and return to us is the `'add_meta_box'` array bit.
+  
+  

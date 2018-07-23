@@ -22,6 +22,10 @@ add_action( 'admin_menu', __NAMESPACE__ . '\register_subtitle_meta_box' );
  * @return void
  */
 function register_subtitle_meta_box() {
+
+	$meta_box_key   = '';
+	$config         = getConfig( $meta_box_key, 'add_meta_box' );
+
 	add_meta_box(
 		'mbbasics_subtitle',
 		__( 'Subtitle', 'mbbasics' ),
