@@ -280,3 +280,9 @@ This is how the Meta-Box plugin is at the end of the "WordPress MetaBox Basics" 
     
     * For now, we don't have to worry about the `getConfig()` function itself.
     
+## 0.2.5
+
+* This is just to test: edit the Post.
+
+  When `$config` included `/meta-box-config.php`, it loaded the `'unique-meta-box-id'` array
+  with all our defaults.

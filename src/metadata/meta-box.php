@@ -23,6 +23,9 @@ add_action( 'admin_menu', __NAMESPACE__ . '\register_meta_boxes' );
  */
 function register_meta_boxes() {
 
+	$config = include __DIR__ . '/defaults/meta-box-config.php';
+	ddd( $config );
+
 	$meta_box_key   = '';
 	$config         = getConfig( $meta_box_key, 'add_meta_box' );
 

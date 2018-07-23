@@ -11,3 +11,4 @@
 
 namespace KnowTheCode\Metadata;
 
+include __DIR__ . '/meta-box.php';
