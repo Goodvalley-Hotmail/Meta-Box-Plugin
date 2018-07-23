@@ -250,4 +250,33 @@ This is how the Meta-Box plugin is at the end of the "WordPress MetaBox Basics" 
   means that it's going to point to the configuration array. What we want to plug out from there
   and return to us is the `'add_meta_box'` array bit.
   
+## 0.2.4
+
+- /reusable-meta-box/src/metadata/defaults/meta-box-config.php and
+  /reusable-meta-box/src/metadata/meta-box.php
   
+  * To know what goes in the `'add_meta_box'` array, we have to look at that WordPress function
+  in `/wp-admin/includes/template.php`, around line 917.
+  
+    * $id               -> That's our unique $meta_box_key.
+    * $title            -> You need to tell me which is the Title, that's a specific implementation.
+    * $callback         -> We can use our functions: `render_meta_box()`, `register_meta_boxes()`.
+    * $screen           -> We put the default, which is null.
+    * $context          -> We put the default, which is 'advanced'.
+    * $priority         -> We put the default, which is 'default'.
+    * $callback_args    -> We put the default, which is null.
+    
+  We've now set it up the way that WordPress expects,
+  and each implementation fills up what is different.
+  If not, we have our defaults in place.
+
+- /reusable-meta-box/src/metadata/meta-box.php
+
+    * Now, if we change our `add_meta_box()` function to what we've set up,
+    we turned it into being generic.
+    
+    * It takes a `$configuration` and we map out the structure of what we expect
+    that configuration to be (the defaults), and then we go and map in our `add_meta_box()`.
+    
+    * For now, we don't have to worry about the `getConfig()` function itself.
+    

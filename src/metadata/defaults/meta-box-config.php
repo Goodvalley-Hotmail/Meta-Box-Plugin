@@ -21,7 +21,11 @@ return array(
 	'unique-meta-box-id'    => array(
 
 		'add_meta_box'  => array(
-
+			'title'         => '',
+			'screen'        => null,
+			'context'       => 'advanced',
+			'priority'      => 'default',
+			'callback_args' => null,
 		),
 
 	),

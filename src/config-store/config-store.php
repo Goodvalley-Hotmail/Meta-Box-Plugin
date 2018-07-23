@@ -11,3 +11,8 @@
 
 namespace KnowTheCode\ConfigStore;
 
+function getConfig( $store_key, $subkey = '' ) {
+
+
+
+}

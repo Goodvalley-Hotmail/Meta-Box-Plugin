@@ -13,24 +13,27 @@ namespace KnowTheCode\Metadata;
 
 use WP_Post;
 
-add_action( 'admin_menu', __NAMESPACE__ . '\register_subtitle_meta_box' );
+add_action( 'admin_menu', __NAMESPACE__ . '\register_meta_boxes' );
 /**
- * Register the meta box.
+ * Register the meta boxes.
  *
  * @since 1.0.0
  *
  * @return void
  */
-function register_subtitle_meta_box() {
+function register_meta_boxes() {
 
 	$meta_box_key   = '';
 	$config         = getConfig( $meta_box_key, 'add_meta_box' );
 
 	add_meta_box(
-		'mbbasics_subtitle',
-		__( 'Subtitle', 'mbbasics' ),
-		__NAMESPACE__ . '\render_subtitle_meta_box',
-		array( 'post' )
+		$meta_box_key,
+		$config['title'],
+		__NAMESPACE__ . '\render_meta_box',
+		$config['screen'],
+		$config['context'],
+		$config['priority'],
+		$config['callback_args']
 	);
 }
 
@@ -44,7 +47,7 @@ function register_subtitle_meta_box() {
  *
  * @return void
  */
-function render_subtitle_meta_box( WP_Post $post, array $meta_box ) {
+function render_meta_box( WP_Post $post, array $meta_box ) {
 
 	// Security with a nonce
 	wp_nonce_field( 'mbbasics_save', 'mbbasics_nonce' );
