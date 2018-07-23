@@ -1,6 +1,6 @@
 <?php
 /**
- * Portfolio Meta Box
+ * Subtitle Meta Box
  *
  * @package     KnowTheCode\MetaBox
  * @since       1.0.0
@@ -9,11 +9,11 @@
  * @license     GNU-2.0+
  */
 
-namespace KnowTheCode\MetaBox;
+namespace KnowTheCode\Metadata;
 
 use WP_Post;
 
-add_action( 'admin_menu', __NAMESPACE__ . '\register_portfolio_meta_box' );
+add_action( 'admin_menu', __NAMESPACE__ . '\register_subtitle_meta_box' );
 /**
  * Register the meta box.
  *
@@ -21,11 +21,11 @@ add_action( 'admin_menu', __NAMESPACE__ . '\register_portfolio_meta_box' );
  *
  * @return void
  */
-function register_portfolio_meta_box() {
+function register_subtitle_meta_box() {
 	add_meta_box(
-		'portfolio',
-		__( 'Portfolio Details', 'portfolio' ),
-		__NAMESPACE__ . '\render_portfolio_meta_box',
+		'mbbasics_subtitle',
+		__( 'Subtitle', 'mbbasics' ),
+		__NAMESPACE__ . '\render_subtitle_meta_box',
 		array( 'post' )
 	);
 }
@@ -40,22 +40,22 @@ function register_portfolio_meta_box() {
  *
  * @return void
  */
-function render_portfolio_meta_box( WP_Post $post, array $meta_box_args ) {
+function render_subtitle_meta_box( WP_Post $post, array $meta_box ) {
 
 	// Security with a nonce
-	wp_nonce_field( 'portfolio_save', 'portfolio_nonce' );
+	wp_nonce_field( 'mbbasics_save', 'mbbasics_nonce' );
 
 	// Get the metadata
-	$client_name    = get_post_meta( $post->ID, 'client_name', true );
-	$client_url     = get_post_meta( $post->ID, 'client_url', true );
+	$subtitle       = get_post_meta( $post->ID, 'subtitle', true );
+	$show_subtitle  = get_post_meta( $post->ID, 'show_subtitle', true );
 
 	// Do any processing that needs to be done
 
 	// Load the view file
-	include METABOX_DIR . 'src/views/portfolio.php';
+	include METABOX_DIR . 'src/views/subtitle.php';
 }
 
-add_action( 'save_post', __NAMESPACE__ . '\save_portfolio_meta_box', 10, 2 );
+add_action( 'save_post', __NAMESPACE__ . '\save_subtitle_meta_box', 10, 2 );
 /**
  * Description.
  *
@@ -66,24 +66,24 @@ add_action( 'save_post', __NAMESPACE__ . '\save_portfolio_meta_box', 10, 2 );
  *
  * @return void
  */
-function save_portfolio_meta_box( $post_id, $post ) {
+function save_subtitle_meta_box( $post_id, $post ) {
 
 	// If there's no data, return false.
-	if ( ! array_key_exists( 'portfolio', $_POST ) ) {
+	if ( ! array_key_exists( 'mbbasics', $_POST ) ) {
 		return;
 	}
 
 	// If the nonce doesn't match, return false.
-	if ( ! wp_verify_nonce( $_POST['portfolio_nonce'], 'portfolio_save' ) ) {
+	if ( ! wp_verify_nonce( $_POST['mbbasics_nonce'], 'mbbasics_save' ) ) {
 		return false;
 	}
 
 	// Merge with defaults.
 	$metadata = wp_parse_args(
-		$_POST['portfolio'],
+		$_POST['mbbasics'],
 		array(
-			'client_name'=> '',
-			'client_url' => '',
+			'subtitle'      => '',
+			'show_subtitle' => 0,
 		)
 	);
 
@@ -95,11 +95,15 @@ function save_portfolio_meta_box( $post_id, $post ) {
 
 			delete_post_meta( $post_id, $meta_key );
 
+			// We add continue, so it skips the rest of the function and goes back up of the loop to start again.
 			continue;
 
 		}
 
-		$value = sanitize_text_field( $value );
+		// Validation and sanitizing.
+		$value = 'subtitle' === $meta_key
+			? sanitize_text_field( $value )
+			: 1;
 
 		update_post_meta( $post_id, $meta_key, $value );
 

@@ -213,3 +213,26 @@ This is how the Meta-Box plugin is at the end of the "WordPress MetaBox Basics" 
 
 - Replace the references to 'mbbasics' and 'subtitle' by the 'portfolio' ones.
 
+## 0.2.2
+
+- Lay out the Arquitecture for our Reusable MetaBox Plugin.
+
+- /reusable-meta-box/src/metadata/defaults/meta-box-config.php
+
+    * It is a good idea to provide a default configuration file.
+    This file is going to be used and merged together with each of the `/config/*.php` files.
+    It has all the default state, it has the mapping for the keys that it expects.
+    We can also copy it for a new `/config/*.php` file and then change what you need.
+    It gives us a starting point, like a boilerplate.
+    
+    * What it is going to return is an array. Not many people know that we can include or
+    require a .php file, and if we return an array, it can be assigned to a variable.
+    Using this tecnique, we're able to load this file, grap the contents because we are
+    going to store it into a configuration variable in the `config-store.php` file.
+    
+    * We know that, for both our `*-meta-box.php` files, we have an add_metabox,
+    a render_metabox with different Post Meta and we have a save_metabox.
+    What is unique is the Metabox key ('mbbasics', 'portfolio'), that we use to know
+    if this is the right Metabox, and we also use it in our `/views/*.php` files.
+    So we will use that Key in our `meta-box-config.php` file, as the `'unique-meta-box-id'` value.
+    
