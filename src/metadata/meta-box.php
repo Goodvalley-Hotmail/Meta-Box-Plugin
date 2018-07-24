@@ -23,9 +23,6 @@ add_action( 'admin_menu', __NAMESPACE__ . '\register_meta_boxes' );
  */
 function register_meta_boxes() {
 
-	$config = include __DIR__ . '/defaults/meta-box-config.php';
-	ddd( $config );
-
 	$meta_box_key   = '';
 	$config         = getConfig( $meta_box_key, 'add_meta_box' );
 
@@ -50,10 +47,13 @@ function register_meta_boxes() {
  *
  * @return void
  */
-function render_meta_box( WP_Post $post, array $meta_box ) {
+function render_meta_box( WP_Post $post, array $meta_box_args ) {
+
+	$meta_box_key   = $meta_box_args['id'];
+	$config         = getConfig( $meta_box_key );
 
 	// Security with a nonce
-	wp_nonce_field( 'mbbasics_save', 'mbbasics_nonce' );
+	wp_nonce_field( $meta_box_key . '_action', $meta_box_key . '_name' );
 
 	// Get the metadata
 	$subtitle       = get_post_meta( $post->ID, 'subtitle', true );
@@ -62,7 +62,7 @@ function render_meta_box( WP_Post $post, array $meta_box ) {
 	// Do any processing that needs to be done
 
 	// Load the view file
-	include METABOX_DIR . 'src/views/subtitle.php';
+	include $config['view'];
 }
 
 add_action( 'save_post', __NAMESPACE__ . '\save_subtitle_meta_box', 10, 2 );

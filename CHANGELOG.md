@@ -252,8 +252,8 @@ This is how the Meta-Box plugin is at the end of the "WordPress MetaBox Basics" 
   
 ## 0.2.4
 
-- /reusable-meta-box/src/metadata/defaults/meta-box-config.php and
-  /reusable-meta-box/src/metadata/meta-box.php
+- `/reusable-meta-box/src/metadata/defaults/meta-box-config.php` and
+  `/reusable-meta-box/src/metadata/meta-box.php`
   
   * To know what goes in the `'add_meta_box'` array, we have to look at that WordPress function
   in `/wp-admin/includes/template.php`, around line 917.
@@ -270,7 +270,7 @@ This is how the Meta-Box plugin is at the end of the "WordPress MetaBox Basics" 
   and each implementation fills up what is different.
   If not, we have our defaults in place.
 
-- /reusable-meta-box/src/metadata/meta-box.php
+- `/reusable-meta-box/src/metadata/meta-box.php`
 
     * Now, if we change our `add_meta_box()` function to what we've set up,
     we turned it into being generic.
@@ -286,3 +286,33 @@ This is how the Meta-Box plugin is at the end of the "WordPress MetaBox Basics" 
 
   When `$config` included `/meta-box-config.php`, it loaded the `'unique-meta-box-id'` array
   with all our defaults.
+  
+## 0.2.6
+
+- `/reusable-meta-box/src/metadata/defaults/meta-box-config.php` and
+  `/reusable-meta-box/src/metadata/meta-box.php`
+  
+  We are going to set up the Render Parameters (video #09)
+  
+  * In the $meta_box_args array, we have the Meta Box ID, which is the `'unique-meta-box-id'` value.
+  
+  * Then, we need the configuration, which we get with the `getConfig()` function.
+  
+  * As for the `wp_nonce_field()`, `'mbbasics_save'` is an action and `'mbbasics_nonce'` is the name.
+  
+  * Regarding Custom Fields, we have to add their information in the `'custom_fields'` defaults array:
+  
+    - 'meta_key' -> We also need to know more about the meta_key, so it's an array:
+    
+        * `'is_single'` -> true or false (true as default).
+        * default value -> empty string as default.
+        
+  * We need to know what's our 'view' file.
+    This has to be an absolute path to our Meta Box's View file.
+    When this element of the array is populated, we can use that information in the
+    `include`, so that it will include the `'view'` element.
+    
+    We no longer need the `'add_meta_box'` bit, since we need the whole `'unique-meta-box-id'` thing.
+    Even though we may not use the `'add_meta_box'` part of the array, we can go ahead and
+    get the `'custom_fields'` and/or the `'view'` and use it where we need them.
+
