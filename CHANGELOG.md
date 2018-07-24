@@ -330,4 +330,27 @@ This is how the Meta-Box plugin is at the end of the "WordPress MetaBox Basics" 
   Now we can process the `get_post_meta()` information of `$subtitle`, `$show_subtitle` or
   any other Custom Field that we may have.
   
+## 0.2.8
+
+- `/reusable-meta-box/src/metadata/defaults/meta-box-config.php` and
+  `/reusable-meta-box/src/metadata/meta-box.php`
   
+  We now need to assign every bit of the `get_post_meta()` function into something.
+  
+  Let's create a `$custom_fields` variable that we will use, and it will be an array.
+  
+  We will use the 
+  
+  We will populate this array with the `get_post_meta()` function.
+  
+  We will use the `$custom_fields` with the `$meta_key` to go and extract what the actual
+  value is.
+  
+  * `$meta_key` is our Meta Key, so it goes in place of `'subtitle'`
+  (or `'show_subtitle'`, or whatever)
+  
+  * The `'meta_key'` array in `meta-box-config.php` is the `$custom_field_config`,
+  so the `true` boolean is the `is_single` element.
+  
+  Now we are able to pull out the required information, put in on the `$custom_fields`
+  array, so we don't need any of the `get_post_meta()` lines below anymore.

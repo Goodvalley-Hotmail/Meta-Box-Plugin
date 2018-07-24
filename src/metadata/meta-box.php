@@ -57,14 +57,13 @@ function render_meta_box( WP_Post $post, array $meta_box_args ) {
 
 	// Get the metadata
 
+	$custom_fields = [];
+
 	foreach ( $config['custom_fields'] as $meta_key => $custom_field_config ) {
 
-		get_post_meta( $post->ID, 'subtitle', true );
+		$custom_fields[ $meta_key ] = get_post_meta( $post->ID, $meta_key, $custom_field_config['is_single'] );
 
 	}
-
-	$subtitle       = get_post_meta( $post->ID, 'subtitle', true );
-	$show_subtitle  = get_post_meta( $post->ID, 'show_subtitle', true );
 
 	// Do any processing that needs to be done
 
