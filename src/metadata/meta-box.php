@@ -97,16 +97,17 @@ function save_subtitle_meta_box( $post_id, $post ) {
 		return;
 	}
 
-	wp_nonce_field( $meta_box_key . '_nonce_action', $meta_box_key . '_nonce_name' );
-
 	// If the nonce doesn't match, return false.
-	if ( ! wp_verify_nonce( $meta_box_key . '_nonce_name', $meta_box_key . '_nonce_action' ) ) {
+	if ( ! wp_verify_nonce(
+		$meta_box_key . '_nonce_name',
+		$meta_box_key . '_nonce_action'
+	) ) {
 		return false;
 	}
 
 	// Merge with defaults.
 	$metadata = wp_parse_args(
-		$_POST['mbbasics'],
+		$_POST[$meta_box_key],
 		array(
 			'subtitle'      => '',
 			'show_subtitle' => 0,

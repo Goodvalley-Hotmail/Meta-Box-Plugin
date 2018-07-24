@@ -389,4 +389,11 @@ We will do now the first part of the Save Meta Box.
   Just as we did before (I think in v007), this maps by crossing: the `_nonce_action`
   goes in place of `'mbbasics_save'` and `_nonce_name` goes in place of `'mbbasics_nonce'`.
   
-  
+## 0.2.11
+
+- Now we can delete the `wp_nonce_field()` line.
+
+- `$_POST['mbbasics']` is our `$meta_box_key` Key, so we put it there.
+
+- As for the array below, we know that we need to do something with defaults,
+but we will do that later on.
