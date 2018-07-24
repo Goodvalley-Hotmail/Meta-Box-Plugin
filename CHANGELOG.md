@@ -397,3 +397,14 @@ We will do now the first part of the Save Meta Box.
 
 - As for the array below, we know that we need to do something with defaults,
 but we will do that later on.
+
+## 0.2.12
+
+- `/reusable-meta-box/src/metadata/defaults/meta-box-config.php`
+
+  * As for the delete, we need to know a `'state'` to do the Delete. So, in the
+  `'meta_key'` array we will state what is a valid state for a Delete. in this case,
+  if we find an empty string, we do the Delete.
+  
+  * We also need a sanitizing function. This will be a callable function that we can
+  run in order to do the sanitizing.

@@ -74,6 +74,7 @@ function render_meta_box( WP_Post $post, array $meta_box_args ) {
 
 	// Load the view file
 	include $config['view'];
+
 }
 
 add_action( 'save_post', __NAMESPACE__ . '\save_subtitle_meta_box', 10, 2 );
@@ -92,10 +93,13 @@ function save_subtitle_meta_box( $post_id, $post ) {
 	$meta_box_key   = '';
 	$config         = getConfig( $meta_box_key, 'custom_fields' );
 
-	// If there's no data, return false.
+	// If this is not the right Meta Box, then bail out.
 	if ( ! array_key_exists( $meta_box_key, $_POST ) ) {
 		return;
 	}
+
+	// Another conditional where we don't save
+	// CRON, AJAX...
 
 	// If the nonce doesn't match, return false.
 	if ( ! wp_verify_nonce(
@@ -107,7 +111,7 @@ function save_subtitle_meta_box( $post_id, $post ) {
 
 	// Merge with defaults.
 	$metadata = wp_parse_args(
-		$_POST[$meta_box_key],
+		$_POST[ $meta_box_key ],
 		array(
 			'subtitle'      => '',
 			'show_subtitle' => 0,

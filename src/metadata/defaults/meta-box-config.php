@@ -42,11 +42,17 @@ return array(
 		),
 
 	),
+	/*
+	 * Configure each Custom Field, specifying its meta_key, default value, delete_state and sanitizing function.
+	 */
 	'custom_fields'     => array(
 
+		// Specify this Field's Meta Key. It's used in the DataBase.
 		'meta_key'      => array(
-			'is_single' => true,
-			'default'   => '',
+			'is_single'     => true, // True means it's a single. False means it's an Array.
+			'default'       => '', // Specify the Custom Field's default value.
+			'delete_state'  => '', // What is the state that signals to delete this Meta Key from the DataBase.
+			'sanitize'      => 'sanitize_text_field', // Callable sanitizer function such as sanitize_text_field, sanitize_email, strip_tags, intval, etc.
 		),
 
 	),
