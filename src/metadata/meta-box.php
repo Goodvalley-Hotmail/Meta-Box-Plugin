@@ -56,6 +56,13 @@ function render_meta_box( WP_Post $post, array $meta_box_args ) {
 	wp_nonce_field( $meta_box_key . '_action', $meta_box_key . '_name' );
 
 	// Get the metadata
+
+	foreach ( $config['custom_fields'] as $meta_key => $custom_field_config ) {
+
+		get_post_meta( $post->ID, 'subtitle', true );
+
+	}
+
 	$subtitle       = get_post_meta( $post->ID, 'subtitle', true );
 	$show_subtitle  = get_post_meta( $post->ID, 'show_subtitle', true );
 

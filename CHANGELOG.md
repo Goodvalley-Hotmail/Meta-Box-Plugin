@@ -316,3 +316,18 @@ This is how the Meta-Box plugin is at the end of the "WordPress MetaBox Basics" 
     Even though we may not use the `'add_meta_box'` part of the array, we can go ahead and
     get the `'custom_fields'` and/or the `'view'` and use it where we need them.
 
+## 0.2.7
+
+- `/reusable-meta-box/src/metadata/defaults/meta-box-config.php` and
+  `/reusable-meta-box/src/metadata/meta-box.php`
+  
+  We are going to address the "Get the MetaData" part.
+  
+  We would need `$config`, so we can do a `foreach( $config['custom_fields'] )`,
+  since we have an array of Custom Fields. What we can get out of that `foreach()`
+  is a Meta Key and a Custom Field Configuration for that Meta Key.
+  
+  Now we can process the `get_post_meta()` information of `$subtitle`, `$show_subtitle` or
+  any other Custom Field that we may have.
+  
+  
