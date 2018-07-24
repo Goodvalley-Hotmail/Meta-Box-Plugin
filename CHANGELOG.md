@@ -366,3 +366,27 @@ Now it's time to change our View files.
   
 If we didn't get anything back, we should load up the default values.
 
+## 0.2.10
+
+We will do now the first part of the Save Meta Box.
+
+- `/reusable-meta-box/src/metadata/defaults/meta-box-config.php` and
+  `/reusable-meta-box/src/metadata/meta-box.php`
+  
+  * First, we need the Meta Key.
+  
+  * Then, we also need the Configuration, except that we don't need the `'view'` or the `'add_meta_box'`
+  parts of the array. We just need the `'custom_fields'` bit, so we can say
+  "just give me the `'custom_fields'` part".
+  
+  * The `array_key_exists()` part is checking if this is our Meta Box or not,
+  so it no longer has to be hardcoded. Instead, we use our `$meta_box_key` Key.
+  Later on, we will figure out how to get those Keys.
+  
+  * For the nonce line, first we will change the `wp_nonce_field()` line in the
+  Render part of our code so that the `_action` and `_name` can be more specific
+  to the nonce. Then we will use the same line in the Save part of our code.
+  Just as we did before (I think in v007), this maps by crossing: the `_nonce_action`
+  goes in place of `'mbbasics_save'` and `_nonce_name` goes in place of `'mbbasics_nonce'`.
+  
+  

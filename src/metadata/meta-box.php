@@ -53,7 +53,7 @@ function render_meta_box( WP_Post $post, array $meta_box_args ) {
 	$config         = getConfig( $meta_box_key );
 
 	// Security with a nonce
-	wp_nonce_field( $meta_box_key . '_action', $meta_box_key . '_name' );
+	wp_nonce_field( $meta_box_key . '_nonce_action', $meta_box_key . '_nonce_name' );
 
 	// Get the metadata
 	$custom_fields = [];
@@ -89,13 +89,18 @@ add_action( 'save_post', __NAMESPACE__ . '\save_subtitle_meta_box', 10, 2 );
  */
 function save_subtitle_meta_box( $post_id, $post ) {
 
+	$meta_box_key   = '';
+	$config         = getConfig( $meta_box_key, 'custom_fields' );
+
 	// If there's no data, return false.
-	if ( ! array_key_exists( 'mbbasics', $_POST ) ) {
+	if ( ! array_key_exists( $meta_box_key, $_POST ) ) {
 		return;
 	}
 
+	wp_nonce_field( $meta_box_key . '_nonce_action', $meta_box_key . '_nonce_name' );
+
 	// If the nonce doesn't match, return false.
-	if ( ! wp_verify_nonce( $_POST['mbbasics_nonce'], 'mbbasics_save' ) ) {
+	if ( ! wp_verify_nonce( $meta_box_key . '_nonce_name', $meta_box_key . '_nonce_action' ) ) {
 		return false;
 	}
 
