@@ -354,3 +354,15 @@ This is how the Meta-Box plugin is at the end of the "WordPress MetaBox Basics" 
   
   Now we are able to pull out the required information, put in on the `$custom_fields`
   array, so we don't need any of the `get_post_meta()` lines below anymore.
+
+## 0.2.9
+
+Now it's time to change our View files.
+
+- `/reusable-meta-box/src/views/subtitle.php`
+  
+  We no longer use the `$subtitle` variable. Instead, we can have `$custom_fields`
+  and the Key. Same goes for `$show_subtitle` and the other ones in `portfolio.php`.
+  
+If we didn't get anything back, we should load up the default values.
+

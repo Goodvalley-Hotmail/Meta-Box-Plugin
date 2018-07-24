@@ -56,12 +56,17 @@ function render_meta_box( WP_Post $post, array $meta_box_args ) {
 	wp_nonce_field( $meta_box_key . '_action', $meta_box_key . '_name' );
 
 	// Get the metadata
-
 	$custom_fields = [];
 
 	foreach ( $config['custom_fields'] as $meta_key => $custom_field_config ) {
 
 		$custom_fields[ $meta_key ] = get_post_meta( $post->ID, $meta_key, $custom_field_config['is_single'] );
+
+		if ( ! $custom_fields[ $meta_key ] ) {
+
+			$custom_fields[ $meta_key ] = $custom_field_config['default'];
+
+		}
 
 	}
 
