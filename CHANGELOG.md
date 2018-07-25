@@ -408,3 +408,79 @@ but we will do that later on.
   
   * We also need a sanitizing function. This will be a callable function that we can
   run in order to do the sanitizing.
+
+## 0.2.13
+
+NOTE: if we are building a larger Plugin that has more than a Meta Box, then in our
+`config` folder we should create another folder called `metabox` and put our Meta Box
+Configuration files in it.
+
+We are going to implement our Configuration files. We'll have one for Subtitle and
+one for Portfolio, so we make two copies of `meta-box-config.php` and paste them into
+`/config/subtitle.php` and `/config/portfolio.php`.
+
+- `/config/portfolio.php` and `/config/portfolio-meta-box.php`
+
+  * Our `'unique-meta-box-id'` is `'portfolio'`.
+  * Our `'title'` is `__( 'Portfolio Details', 'portfolio' )`.
+  * The `'screen'` is `array( 'post' )`.
+  * There is nothing for the rest of parameters. We have two choices:
+  we want the defaults, so we can leave those in; or we can delete them,
+  and when we merge them together, those parameters that we haven't configured
+  will be merged in when we do the Config Store.
+  
+  * We make a copy of the Custom Fields because we have two of them,
+  `'client_name'` and `'client_url'`.
+  * `'client_name'` Custom Field
+  
+    - The `'meta_key'` is the `'client_name'`.
+    - Yes, it's a single.
+    - The `'default'` is an empty string.
+    - The `'default state'` is an empty string.
+    - The `'sanitize'` is a `'sanitize_text_field'`.
+  
+  * `'client_url'` Custom Field
+    
+      - The `'meta_key'` is the `'client_url'`.
+      - Yes, it's a single.
+      - The `'default'` is an empty string.
+      - The `'default state'` is an empty string.
+      - The `'sanitize'` is a `'sanitize_text_field'`.
+    
+  * The `'view'` file is `METABOX_DIR . 'src/views/portfolio.php'`.
+  
+  * Now the only thing that's left is to change the opening commentaries for our file.
+
+- `/config/subtitle.php` and `/config/subtitle-meta-box.php`
+
+  * Our `'unique-meta-box-id'` is `'mbbasics_subtitle'`.
+    * Our `'title'` is `__( 'Subtitle', 'mbbasics' )`.
+    * The `'screen'` is `array( 'post' )`.
+    * Again, we get rid of the unchanged default parameters.
+    
+    * Again, we make a copy of the Custom Fields because we have two of them,
+    `'subtitle'` and `'show_subtitle'`.
+    * `'subtitle'` Custom Field
+    
+      - The `'meta_key'` is the `'subtitle'`.
+      - Yes, it's a single.
+      - The `'default'` is an empty string.
+      - The `'default state'` is an empty string.
+      - The `'sanitize'` is a `'sanitize_text_field'`.
+    
+    * `'show_subtitle'` Custom Field
+      
+        - The `'meta_key'` is the `'show_subtitle'`.
+        - Yes, it's a single.
+        - The `'default'` is `0`.
+        - In the case of a Checkbox, when it's not checked it's not in the Post (in $_POST).
+        Therefore, in the `foreach( $metadata as $meta_key => $value )` $metadata,
+        when the loop gets to `'show_subtitle'`, the value will be 0.
+        The `'default state'` is an empty string.
+        Therefore, our delete state should be `0`.
+        - The `'sanitize'` is a `'intval'`, since the values can be `1` or `0`.
+      
+    * The `'view'` file is `METABOX_DIR . 'src/views/subtitle.php'`.
+    
+    * Now the only thing that's left is to change the opening commentaries for our file.
+

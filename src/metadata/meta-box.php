@@ -112,6 +112,7 @@ function save_subtitle_meta_box( $post_id, $post ) {
 	// Merge with defaults.
 	$metadata = wp_parse_args(
 		$_POST[ $meta_box_key ],
+		// Defaults
 		array(
 			'subtitle'      => '',
 			'show_subtitle' => 0,
