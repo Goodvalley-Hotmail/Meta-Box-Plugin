@@ -20,7 +20,7 @@ return array(
 	 * This ID is used when running add_meta_box, for storting in the Config Store,
 	 * for the view file and for save $_POST.
 	 */
-	'mbbasics_subtitle'=> array(
+	'mbbasics'=> array(
 
 		/*
 		 * Configuration parameters for adding the meta box.
@@ -35,7 +35,6 @@ return array(
 			'screen'        => array( 'post' ),
 		),
 
-	),
 	/*
 	 * Configure each Custom Field, specifying its meta_key, default value, delete_state and sanitizing function.
 	 */
@@ -60,5 +59,5 @@ return array(
 	 * Configure the absolute path to our Meta Box's View file.
 	 */
 	'view'              => METABOX_DIR . 'src/views/subtitle.php',
-
+	),
 );

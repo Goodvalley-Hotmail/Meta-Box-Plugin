@@ -34,8 +34,6 @@ return array(
 			// The screen or screens on which to show the box, such as the Post type, link, comment, etc.
 			'screen'        => array( 'post' ),
 		),
-
-	),
 	/*
 	 * Configure each Custom Field, specifying its meta_key, default value, delete_state and sanitizing function.
 	 */
@@ -60,5 +58,5 @@ return array(
 	 * Configure the absolute path to our Meta Box's View file.
 	 */
 	'view'              => METABOX_DIR . 'src/views/portfolio.php',
-
+	),
 );

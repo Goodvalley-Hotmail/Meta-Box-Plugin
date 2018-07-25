@@ -40,8 +40,6 @@ return array(
 			// (Optional). We can send arguments to our render callback, as an array of arguments.
 			'callback_args' => null,
 		),
-
-	),
 	/*
 	 * Configure each Custom Field, specifying its meta_key, default value, delete_state and sanitizing function.
 	 */
@@ -60,5 +58,5 @@ return array(
 	 * Configure the absolute path to our Meta Box's View file.
 	 */
 	'view'              => '',
-
+	),
 );

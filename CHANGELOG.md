@@ -484,3 +484,15 @@ one for Portfolio, so we make two copies of `meta-box-config.php` and paste them
     
   * Now the only thing that's left is to change the opening commentaries for our file.
 
+## 0.2.14
+
+- In `/src/views/subtitle.php`, we have the name as `mbbasics`,
+so let's change it in our View file so they match.
+
+- We also move `portfolio-meta-box.php` and `subtitle-meta-box.php` to a new `/_save`
+folder, just in case we need to have a look at them again.
+
+- FIXED closing parenthesis bad placed all along since the beginning in the
+Parameters Array, in `/config/subtitle.php`, `/config/portfolio.php` and
+`/src/metadata/defaults/meta-box-config.php`.
+
