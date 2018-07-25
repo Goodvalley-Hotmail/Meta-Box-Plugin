@@ -480,7 +480,7 @@ one for Portfolio, so we make two copies of `meta-box-config.php` and paste them
         Therefore, our delete state should be `0`.
         - The `'sanitize'` is a `'intval'`, since the values can be `1` or `0`.
       
-    * The `'view'` file is `METABOX_DIR . 'src/views/subtitle.php'`.
+  * The `'view'` file is `METABOX_DIR . 'src/views/subtitle.php'`.
     
-    * Now the only thing that's left is to change the opening commentaries for our file.
+  * Now the only thing that's left is to change the opening commentaries for our file.
 
