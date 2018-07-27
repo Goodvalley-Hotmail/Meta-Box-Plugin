@@ -641,3 +641,12 @@ and `internals.php`.
 - We also want to make sure that the Configuration returned is an array by type casting it.
 
 - We can test it in the next 0.2.20 Version.
+
+## 0.2.20
+
+- We test our `/src/config-store/internals.php` code in `/bootstrap.php`.
+
+- NOTE - Notice that `_load_config_from_filesystem()` is in a different namespace,
+  so we need the full qualified name of that function, and includes the entire namespace.
+
+- We also make sure that we don't have anything left colliding.

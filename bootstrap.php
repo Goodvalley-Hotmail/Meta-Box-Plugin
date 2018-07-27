@@ -20,6 +20,8 @@
 
 namespace KnowTheCode\MetaBox;
 
+use function KnowTheCode\ConfigStore\_load_config_from_filesystem;
+
 if ( ! defined( 'ABSPATH' ) ) {
 	exit( 'Cheatin&#8217; uh?' );
 }
@@ -52,20 +54,11 @@ function launch() {
 	init_constants();
 
 	require __DIR__ . '/src/config-store/module.php';
-	require __DIR__ . '/src/metadata/module.php';
+
+	ddd( \KnowTheCode\ConfigStore\_load_config_from_filesystem( __DIR__ . '/config/portfolio.php' ) );
+
+	//require __DIR__ . '/src/metadata/module.php';
 
 }
 
-//launch();
-
-$config = require __DIR__ . '/config/portfolio.php';
-
-d( key( $config ) );
-d( current( $config ) );
-
-foreach ( $config as $store_key => $parameters ) {
-
-	d( $store_key );
-	ddd( $parameters );
-
-}
+launch();

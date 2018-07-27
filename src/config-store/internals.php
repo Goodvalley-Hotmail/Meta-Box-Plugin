@@ -25,9 +25,9 @@ namespace KnowTheCode\ConfigStore;
  *
  * @return void
  */
-function _the_store( $store_key, $config_to_store[] ) {
+function _the_store( $store_key, $config_to_store = array() ) {
 
-	static $config_store[];
+	static $config_store = array();
 
 	// Store
 	if ( $config_to_store ) {
