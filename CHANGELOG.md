@@ -628,3 +628,16 @@ and `internals.php`.
   
   In the next version 0.2.19, we'll try both.
 
+## 0.2.19
+
+`/bootstrap.php`
+
+- We try the `foreach()` and PHP array functions, and both work the same.
+
+  Tonya chooses the array functions.
+
+`/src/config-store/internals.php`
+
+- We also want to make sure that the Configuration returned is an array by type casting it.
+
+- We can test it in the next 0.2.20 Version.

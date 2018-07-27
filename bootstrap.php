@@ -60,4 +60,12 @@ function launch() {
 
 $config = require __DIR__ . '/config/portfolio.php';
 
-ddd( $config );
+d( key( $config ) );
+d( current( $config ) );
+
+foreach ( $config as $store_key => $parameters ) {
+
+	d( $store_key );
+	ddd( $parameters );
+
+}
