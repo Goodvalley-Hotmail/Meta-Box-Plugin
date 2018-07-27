@@ -1,8 +1,8 @@
 <?php
 /**
- * Description
+ * Public API to interact with the ConfigStore.
  *
- * @package     ${NAMESPACE}
+ * @package     KnowTheCode\ConfigStore
  * @since       1.0.0
  * @author      Carles Goodvalley
  * @link        https://cameraski.com
@@ -26,6 +26,10 @@ function getConfigParameter( $store_key, $parameter_key ) {
 
 function loadConfig( $path_to_file ) {
 
+	// 1.- _load_a_file( $path_to_file )
 
+	// 2.- $store_key
+
+	// 3.- $config
 
 }

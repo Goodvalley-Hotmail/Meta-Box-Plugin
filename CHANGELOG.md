@@ -538,3 +538,37 @@ function that lets us get just a Parameter. The `$subkey` in the `getConfig()` w
 become a `$parameter_key` that we would go and get.
 
 Now we have two getter and one setter functions we can use to work with the API.
+
+## 0.2.16
+
+Let's create our Black Box, the internal system of our Store.
+
+In OOP, we would just set that to private or protected. In procedural,
+begin with an underscore. That underscore means it's intended to be private, not to
+be used externally.
+
+- We need one `_the_store()` function with the `$store_key` and the `$config` configuration
+itself that we want to store, set to a default array. So the Store has now two functions:
+we can store and we can get.
+
+- We then need a static memory, and we will call it `$config_store`, set to an empty array.
+
+- Next, we need to load a file, with the path to that file. It needs to take
+`$path_to_the_file`, go to our file system (`/config/portfolio.php`, `/config/subtitle.php`)
+and load that information into memory, extract the Key and then send it back to our
+`//Store` to be stored away.
+
+  So, when we load a Configuration (`loadConfig()`), we go to `_load_a_file()`,
+  get that file and then call our Store (`_the_store()`) and store that away.
+  
+- Since the `config-store.php` file is becoming too long, we will take our functions
+  to an `api.php` file. The remaining code is all our private, internal Config Store,
+  so to make this more clear we rename this file to `internals.php`.
+
+- We also copy `/src/metadata/module.php` to `/src/config-store/module.php`,
+  so we can use this file to handle loading the `api.php` and `internals.php` files.
+
+- We include the internals and change the Comments on `/src/config-store/module.php`.
+
+- We also correct the lines in `/bootstrap.php`.
+

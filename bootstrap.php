@@ -51,13 +51,8 @@ function init_constants() {
 function launch() {
 	init_constants();
 
-	require __DIR__ . '/src/config-store/config-store.php';
+	require __DIR__ . '/src/config-store/module.php';
 	require __DIR__ . '/src/metadata/module.php';
-
-//	require __DIR__ . '/src/subtitle-meta-box.php';
-//	require __DIR__ . '/src/portfolio-meta-box.php';
-
-
 
 }
 
