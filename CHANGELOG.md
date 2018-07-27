@@ -521,7 +521,9 @@ Get and Load processes. So the intent of a Store like ours is:
     container- such that it only has to load the file one time.
 
 2.- Load it into the store (a cache in memory).
+
 3.- Retain the information so it can be used more times.
+
 4.- Get a Configuration out of the Store or a specific parameter of that Configuration.
 
 There are multiple ways to design and implement our Configuration Store. We could do it
@@ -571,4 +573,14 @@ and load that information into memory, extract the Key and then send it back to 
 - We include the internals and change the Comments on `/src/config-store/module.php`.
 
 - We also correct the lines in `/bootstrap.php`.
+
+## 0.2.17
+
+We are going to do some refactoring in our code in `/src/config-store/api.php`
+
+- We get rid of `$subkey = ''` since we can use `getConfigParameter()` to get a
+  specific parameter.
+
+- We then add/change the comments and some of the code for the functions in `api.php`
+and `internals.php`.
 
