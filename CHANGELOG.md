@@ -496,3 +496,45 @@ folder, just in case we need to have a look at them again.
 Parameters Array, in `/config/subtitle.php`, `/config/portfolio.php` and
 `/src/metadata/defaults/meta-box-config.php`.
 
+## 0.2.15
+
+We've separated the Configuration Store from the MetaData and placed into its own module.
+Our projects could have different types of elements, such as Shortcodes, Widgets, CPT's,
+Taxonomies, Templates, etc., and each of these could have a Configuration file with
+runtime parameters that make them unique.
+
+Therefore, following our modular configuration design pattern means that we need a store
+that has an expected structure of what's coming into it, but doesn't care if it's a
+configuration for this or that type of element.
+
+`/src/config-store/config-store.php`
+
+We need a way to get a Configuration. That is part of our API. Think of it as a
+black box, and we give ways to work within that black box. We give a Get (`getConfig()`,
+a way to get something out of the Store), we give a Load (a way to load something into
+the Store), a Clear (to remove something from the Store), etc. We're going to handle the
+Get and Load processes. So the intent of a Store like ours is:
+
+1.- Load a file from the filesystem, but just once. In our implementation of the
+    Metabox, we had three functions: Register, Render and Save. All need to access
+    each of the Config files. So, to optimize this, we create a storage -which is a
+    container- such that it only has to load the file one time.
+
+2.- Load it into the store (a cache in memory).
+3.- Retain the information so it can be used more times.
+4.- Get a Configuration out of the Store or a specific parameter of that Configuration.
+
+There are multiple ways to design and implement our Configuration Store. We could do it
+with a class structure where we have static functions, and that would be called a
+Class Wrapper. Another would be to create an OOP and retain that information in memory
+with an Object. We could even do it in procedural and use a static variable as a Store.
+We will do it in procedural.
+
+- Besides the Get, we need a way to Load a Configuration with a path to the file.
+  This path is absolute.
+
+- We can leave our `getConfig()` as is, but we can also build a `getConfigParameter()`
+function that lets us get just a Parameter. The `$subkey` in the `getConfig()` would
+become a `$parameter_key` that we would go and get.
+
+Now we have two getter and one setter functions we can use to work with the API.
