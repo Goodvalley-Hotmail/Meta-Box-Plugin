@@ -663,3 +663,11 @@ and `internals.php`.
   of two elements. So we can use `list()` and when we call our `_load_config_from_filesystem()`
   function, we can separate the elements.
 
+## 0.2.22
+
+`/src/config-store/api.php`
+
+- We use list to load the elements.
+
+- Let's test it.
+

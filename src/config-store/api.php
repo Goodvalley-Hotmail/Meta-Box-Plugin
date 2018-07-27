@@ -54,4 +54,7 @@ function loadConfig( $path_to_file ) {
 
 	list( $store_key, $config ) = _load_config_from_filesystem( $path_to_file );
 
+	d( $store_key );
+	ddd( $config );
+
 }
