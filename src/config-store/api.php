@@ -52,10 +52,6 @@ function getConfigParameter( $store_key, $parameter_key ) {
  */
 function loadConfig( $path_to_file ) {
 
-	// 1.- _load_a_file( $path_to_file )
-
-	// 2.- $store_key
-
-	// 3.- $config
+	list( $store_key, $config ) = _load_config_from_filesystem( $path_to_file );
 
 }

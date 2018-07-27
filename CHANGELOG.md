@@ -650,3 +650,16 @@ and `internals.php`.
   so we need the full qualified name of that function, and includes the entire namespace.
 
 - We also make sure that we don't have anything left colliding.
+
+## 0.2.21
+
+`/bootstrap.php`
+
+- In v0.2.20, we got back two elements: the `'portfolio'` Storage Key and the
+  array of Configuration Parameters. How can we get them as separate `$store_key` and
+  `$config`?
+  
+  Theres a PHP function called `list()`. We saw that what was returned was an array
+  of two elements. So we can use `list()` and when we call our `_load_config_from_filesystem()`
+  function, we can separate the elements.
+

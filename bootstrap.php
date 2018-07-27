@@ -55,7 +55,10 @@ function launch() {
 
 	require __DIR__ . '/src/config-store/module.php';
 
-	ddd( \KnowTheCode\ConfigStore\_load_config_from_filesystem( __DIR__ . '/config/portfolio.php' ) );
+	list( $store_key, $config ) = \KnowTheCode\ConfigStore\_load_config_from_filesystem( __DIR__ . '/config/portfolio.php' );
+
+	d( $store_key );
+	ddd( $config );
 
 	//require __DIR__ . '/src/metadata/module.php';
 
