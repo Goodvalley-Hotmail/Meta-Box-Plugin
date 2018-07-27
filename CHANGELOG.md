@@ -584,3 +584,47 @@ We are going to do some refactoring in our code in `/src/config-store/api.php`
 - We then add/change the comments and some of the code for the functions in `api.php`
 and `internals.php`.
 
+## 0.2.18
+
+`/bootstrap.php`
+
+- If we comment `launch()` out and require `/config/portfolio.php`, and then do a `ddd()`,
+  we will see what it takes to actually load a file from the filesystem using the
+  architecture that we've set up.
+  
+  We obtain the `'portfolio'` and all its array of Configuration Parameters within
+  that file.
+  
+  So, as we see, all matches and we can put the same `require` in our `internals.php`.
+
+`/src/config-store/internals.php`
+
+- Our `require` gives us a `$config` configuration for `'portfolio'`.
+
+  But, if we look at our ddd() that contains our `'portfolio'` example, we see our
+  `'portfolio'` Key, so there's our `$store_key`. But the actual Configuration itself
+  is the value of that first element. How can we get that out so that we can return it?
+  
+  Because we say that we want to load it, but we also want to return it (`return array()`),
+  so we need to extract the Key and the Configuration.
+  
+  One way to do it would be with a `foreach()`:
+  
+  `foreach( $config as $store_key => $parameters ) {`
+    
+        return array(      
+            $store_key,
+            $parameters
+        );
+  `}`
+  
+  Another way is to use some PHP functions that work within an array:
+  
+  `return array(`
+  
+        key( $config ), // We want the Key.
+        current( $config ) // We want the current value.
+  `);`
+  
+  In the next version 0.2.19, we'll try both.
+

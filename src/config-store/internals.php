@@ -51,7 +51,7 @@ function _the_store( $store_key, $config_to_store[] ) {
  */
 function _load_config_from_filesystem( $path_to_the_file ) {
 
-
+	$config = require $path_to_the_file;
 
 	return array(
 		$store_key,

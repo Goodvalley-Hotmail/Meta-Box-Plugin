@@ -56,4 +56,8 @@ function launch() {
 
 }
 
-launch();
+//launch();
+
+$config = require __DIR__ . '/config/portfolio.php';
+
+ddd( $config );
