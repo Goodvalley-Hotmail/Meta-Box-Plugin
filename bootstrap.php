@@ -55,7 +55,7 @@ function launch() {
 
 	require __DIR__ . '/src/config-store/module.php';
 
-	\KnowTheCode\ConfigStore\loadConfig( __DIR__ . '/config/portfolio.php' );
+	\KnowTheCode\ConfigStore\loadConfigFromFilesystem( __DIR__ . '/config/portfolio.php' );
 
 	//require __DIR__ . '/src/metadata/module.php';
 

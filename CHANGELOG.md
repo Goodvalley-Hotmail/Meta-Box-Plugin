@@ -667,7 +667,31 @@ and `internals.php`.
 
 `/src/config-store/api.php`
 
-- We use list to load the elements.
+- We use `list()` to load the elements.
 
 - Let's test it.
 
+## 0.2.23
+
+`/src/config-store/api.php`
+
+- rename `loadConfig()` to `loadConfigFromFilesystem()` to be specific.
+
+- Add a `loadConfig()` function that already has the Parameters.
+
+`/src/config-store/internals.php`
+
+- Once we have the `$store_key` and the `$config` elements from `api.php`,
+  we need to load them into the Store.
+  
+  In `internals.php`, the `_load_config_from_filesystem()` function does its work
+  by requiring, getting it from the filesystem, and then in the `_the_store()`
+  function, what we need to do is: when we're passing in a `$store_key` and a
+  `$config_to_store` configuration, then we need to store that.
+  
+  So let's say that `$config_store[ $store_key ] = $config_to_store;`.
+  
+  To check that it works, let's return `$config_store`, the whole thing.
+  
+  Let's test it.
+  

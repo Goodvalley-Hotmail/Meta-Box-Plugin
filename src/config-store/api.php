@@ -40,7 +40,6 @@ function getConfigParameter( $store_key, $parameter_key ) {
 
 
 
-
 }
 
 /**
@@ -50,11 +49,23 @@ function getConfigParameter( $store_key, $parameter_key ) {
  *
  * @param string $path_to_file - Absolute path to the config file.
  */
-function loadConfig( $path_to_file ) {
+function loadConfigFromFilesystem( $path_to_file ) {
 
 	list( $store_key, $config ) = _load_config_from_filesystem( $path_to_file );
+	$store = _the_store( $store_key, $config );
 
-	d( $store_key );
-	ddd( $config );
+	ddd( $store );
 
+}
+
+/**
+ * Load the Configuration into the Store.
+ *
+ * @since   1.0.0
+ *
+ * @param string    $store_key  -> Unique Storage Key.
+ * @param mixed     $config     -> Runtime Configuration Parameter(s).
+ */
+function loadConfig( $store_key, $config ) {
+	_the_store( $store_key, $config );
 }

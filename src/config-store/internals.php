@@ -33,8 +33,11 @@ function _the_store( $store_key, $config_to_store = array() ) {
 	if ( $config_to_store ) {
 
 		// Store here.
+		$config_store[ $store_key ] = $config_to_store;
 
 	}
+
+	return $config_store;
 
 	// Get
 
