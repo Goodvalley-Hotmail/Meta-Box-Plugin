@@ -737,3 +737,44 @@ and `internals.php`.
       
       Tonya thinks that her choice is much easier to read, because having two
       or more `$config[]` is confusing as to what is which one.
+
+## 0.2.25
+
+The next thing is getting the Configuration out of the Store.
+
+`/src/config-store/api.php`
+
+We have two different functions:
+
+- `getConfig( $store_key )`, which gets the whole Configuration by the Store Key.
+- `getConfigParameter( $store_key, $parameter_key )`, which gets a specific Parameter.
+
+How do we do this? If we look at our Store (`/src/config-store/internals.php`),
+there's the `_the_store()` function and then we return the whole thing with
+`return $config_store;`. But we also have to deal with getting something out of
+the Store.
+
+- First, we can just return `true` when we're done storing, just to tell whomever
+  is asking that we've finished storing away.
+
+- So we delete the `return $config_store;` and that Key. But there is one problem:
+  what happens if that key doesn't exist in the Store? Let's first assume that
+  the Key does exist.
+  
+- `/src/config-store/api.php`
+  
+  * For `getConfig( $store_key )`: if we assume the Key exists,
+    we can just return the Store and then pass in that Key.
+  
+  * For `getConfigParameter( $store_key, $parameter_key )`: if we look at our Store
+    (`/src/config-store/internals.php`), we don't have a way to go and get that Key.
+    So let's build it right here in this function.
+    
+    For now, we'll assume that the Parameter Key exist. We'll deal with that later.
+
+Let's test this.
+
+To do the testing, we need the Key before we can call 'Get', so in `/src/config-store/api.php`,
+in the `loadConfigFromFilesystem( $path_to_file )` function,
+we'll change `return _the_store( $store_key, $config );` with
+`_the_store( $store_key, $config );` and then `return $store_key`.

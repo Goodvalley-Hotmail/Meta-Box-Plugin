@@ -22,7 +22,7 @@ namespace KnowTheCode\ConfigStore;
  */
 function getConfig( $store_key ) {
 
-
+	return _the_store( $store_key );
 
 }
 
@@ -38,7 +38,11 @@ function getConfig( $store_key ) {
  */
 function getConfigParameter( $store_key, $parameter_key ) {
 
+	$config = getConfig( $store_key );
 
+	// Do something if the Parameter Key doesn't exist.
+
+	return $config[ $parameter_key ];
 
 }
 
@@ -52,7 +56,12 @@ function getConfigParameter( $store_key, $parameter_key ) {
 function loadConfigFromFilesystem( $path_to_file ) {
 
 	list( $store_key, $config ) = _load_config_from_filesystem( $path_to_file );
-	return _the_store( $store_key, $config );
+
+	//return _the_store( $store_key, $config );
+
+	_the_store( $store_key, $config );
+
+	return $store_key;
 
 }
 

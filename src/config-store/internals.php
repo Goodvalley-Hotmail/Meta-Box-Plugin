@@ -35,11 +35,13 @@ function _the_store( $store_key, $config_to_store = array() ) {
 		// Store here.
 		$config_store[ $store_key ] = $config_to_store;
 
+		return true;
+
 	}
 
-	return $config_store;
-
 	// Get
+	// Deal with when the Key doesn't exist.
+	return $config_store[ $store_key ];
 
 }
 
