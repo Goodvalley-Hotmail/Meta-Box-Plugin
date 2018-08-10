@@ -52,9 +52,7 @@ function getConfigParameter( $store_key, $parameter_key ) {
 function loadConfigFromFilesystem( $path_to_file ) {
 
 	list( $store_key, $config ) = _load_config_from_filesystem( $path_to_file );
-	$store = _the_store( $store_key, $config );
-
-	ddd( $store );
+	return _the_store( $store_key, $config );
 
 }
 

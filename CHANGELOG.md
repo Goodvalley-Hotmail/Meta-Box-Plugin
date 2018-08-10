@@ -693,5 +693,47 @@ and `internals.php`.
   
   To check that it works, let's return `$config_store`, the whole thing.
   
-  Let's test it.
+- Let's test it.
   
+## 0.2.24
+
+- When we refresh the Post, we get the `$store` back and, for the Portfolio,
+  we stored away those three Parameters.
+  
+- We need to run this a couple of times to see how it works.
+
+  `/src/config-store/api.php`
+  
+  We return `_the_store()`, so we can load a couple of these: portfolio and subtitle.
+    
+  With the first `d();`, the first instance of the store gives us one thing: portfolio.
+  With the second instance, we now have two: portfolio and subtitle.
+    
+  Now we know how the `static` in `/src/config-store/internals.php` works:
+  we called it the first time with the `loadConfigFromFilesystem()` function in
+  `/src/config-store/api.php`, it ran with `_the_store()`, came over to
+  the `_the_store()` function, which stored the configuration away with
+  `$config_store[ $store_key ] = $config_to_store` and then it returned it back.
+    
+  Then we did another one, and this time it adds it as a second element,
+  because the `static` variable allows us to keep a pointer to that part in memory.
+    
+- To sum it up:
+  
+  `/src/config-store/internals.php`
+    * We're pulling something off of the filesystem and storing it into a
+    `$config` variable.
+    
+    * Then we're extracting the Key and the Value out of that, and returning it back
+    as an array.
+    
+  `/src/config-store/api.php`
+    * We use `list()` to capture that and stick them in individual variables:
+    `$store_key` and `$config`.
+    
+      In this part, instead of `list()`, we could have done:
+      `$config = _load_config_from_filesystem( $path_to_the_file );`
+      `return _the_store( $config[0], $config[1] );`
+      
+      Tonya thinks that her choice is much easier to read, because having two
+      or more `$config[]` is confusing as to what is which one.
