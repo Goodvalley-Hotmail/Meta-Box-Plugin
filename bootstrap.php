@@ -59,9 +59,13 @@ function launch() {
 
 	d( \KnowTheCode\ConfigStore\getConfig( $key ) );
 
+	d( \KnowTheCode\ConfigStore\getConfigParameter( $key, 'view' ) );
+
 	$key = \KnowTheCode\ConfigStore\loadConfigFromFilesystem( __DIR__ . '/config/subtitle.php' );
 
-	ddd( \KnowTheCode\ConfigStore\getConfig( $key ) );
+	d( \KnowTheCode\ConfigStore\getConfig( $key ) );
+
+	ddd( \KnowTheCode\ConfigStore\getConfigParameter( $key, 'custom_fields' ) );
 
 	//require __DIR__ . '/src/metadata/module.php';
 

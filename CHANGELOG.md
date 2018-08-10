@@ -778,3 +778,17 @@ To do the testing, we need the Key before we can call 'Get', so in `/src/config-
 in the `loadConfigFromFilesystem( $path_to_file )` function,
 we'll change `return _the_store( $store_key, $config );` with
 `_the_store( $store_key, $config );` and then `return $store_key`.
+
+## 0.2.26
+
+Now we are able to get out a particular Configuration. But what if we need to
+get a specific Key out of that though? What if We just want the View?
+
+We did `d( \KnowTheCode\ConfigStore\getConfig( $key ) );`, but now we need
+something like `d( \KnowTheCode\ConfigStore\getConfig( $key, 'view' ) );`
+
+If we come back over to `/src/config-store/api.php`, we see that we need
+`getConfigParameter()` for that, so that would be
+`d( \KnowTheCode\ConfigStore\getConfigParameter( $key, 'view' ) );`.
+
+We'll do the same for Subtitle, but with the Custom Fields.
