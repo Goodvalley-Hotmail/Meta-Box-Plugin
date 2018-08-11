@@ -792,3 +792,22 @@ If we come back over to `/src/config-store/api.php`, we see that we need
 `d( \KnowTheCode\ConfigStore\getConfigParameter( $key, 'view' ) );`.
 
 We'll do the same for Subtitle, but with the Custom Fields.
+
+## 0.2.27
+
+Let's deal now with non-existing Keys.
+
+* `/src/config-store/api.php`
+  In the `getConfigParameter()` function, we say that if this array Key doesn't exist
+  in the Parameter in Config, we throw a new Exception.
+
+* `/src/config-store/internals.php`
+  In the `_the_store()` function, we throw another Exception.
+
+We can test both situations in `/bootstrap.php`:
+
+* For example, to test getConfigParameter():
+  change `view` with `view1` in `d( \KnowTheCode\ConfigStore\getConfigParameter( $key, 'view' ) );`
+* Fix the part above with `view` so it works fine, and then to test getConfig():
+  change `$key` with, say, `12345ad` in `d( \KnowTheCode\ConfigStore\getConfig( $key ) );`
+

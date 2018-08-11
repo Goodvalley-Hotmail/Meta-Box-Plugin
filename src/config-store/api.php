@@ -35,12 +35,22 @@ function getConfig( $store_key ) {
  * @param string $parameter_key
  *
  * @return mixed
+ * @throws \Exception
  */
 function getConfigParameter( $store_key, $parameter_key ) {
 
 	$config = getConfig( $store_key );
 
 	// Do something if the Parameter Key doesn't exist.
+	if ( ! array_key_exists( $parameter_key, $config ) ) {
+		throw new \Exception(
+			sprintf(
+				__( 'The Configuration Parameter [%s] within [%s] does not exist in this Configuration.', 'config-store' ),
+				esc_html( $parameter_key ),
+				esc_html( $store_key )
+			)
+		);
+	}
 
 	return $config[ $parameter_key ];
 

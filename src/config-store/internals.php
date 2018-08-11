@@ -11,6 +11,8 @@
 
 namespace KnowTheCode\ConfigStore;
 
+use Mockery\Exception;
+
 /************************************************
  * API's Black Box -> Config Store's internals
  ***********************************************/
@@ -24,6 +26,7 @@ namespace KnowTheCode\ConfigStore;
  * @param array     $config_to_store
  *
  * @return void
+ * @throws Exception
  */
 function _the_store( $store_key, $config_to_store = array() ) {
 
@@ -40,7 +43,14 @@ function _the_store( $store_key, $config_to_store = array() ) {
 	}
 
 	// Get
-	// Deal with when the Key doesn't exist.
+	if ( ! array_key_exists( $store_key, $config_store ) ) {
+		throw new \Exception(
+			sprintf(
+				__( 'The Configuration for [%s] does not exist in the Configuration Store.', 'config-store' ),
+				esc_html( $store_key )
+			)
+		);
+	}
 	return $config_store[ $store_key ];
 
 }
